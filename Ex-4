@@ -1,0 +1,203 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// Abstract class Car
+abstract class Car {
+    String regNo;
+    String model;
+    String regDate;
+
+    public Car(String regNo, String model, String regDate) {
+        this.regNo = regNo;
+        this.model = model;
+        this.regDate = regDate;
+    }
+
+    // Abstract method to display car details
+    public abstract void displayDetails();
+}
+
+// Subclass TransportVehicle
+class TransportVehicle extends Car {
+    String validityNo;
+    String startDate;
+    int period;
+
+    public TransportVehicle(String regNo, String model, String regDate, String validityNo, String startDate, int period) {
+        super(regNo, model, regDate);
+        this.validityNo = validityNo;
+        this.startDate = startDate;
+        this.period = period;
+    }
+
+    // Override displayDetails method for TransportVehicle
+    @Override
+    public void displayDetails() {
+        System.out.println("Transport Vehicle Details:");
+        System.out.println("Registration Number: " + regNo);
+        System.out.println("Model: " + model);
+        System.out.println("Registration Date: " + regDate);
+        System.out.println("Validity Number: " + validityNo);
+        System.out.println("Start Date: " + startDate);
+        System.out.println("Period: " + period + " years");
+        System.out.println();
+    }
+}
+
+// Subclass PrivateVehicle
+class PrivateVehicle extends Car {
+    String ownerName;
+    String ownerAddress;
+
+    public PrivateVehicle(String regNo, String model, String regDate, String ownerName, String ownerAddress) {
+        super(regNo, model, regDate);
+        this.ownerName = ownerName;
+        this.ownerAddress = ownerAddress;
+    }
+
+    // Override displayDetails method for PrivateVehicle
+    @Override
+    public void displayDetails() {
+        System.out.println("Private Vehicle Details:");
+        System.out.println("Registration Number: " + regNo);
+        System.out.println("Model: " + model);
+        System.out.println("Registration Date: " + regDate);
+        System.out.println("Owner Name: " + ownerName);
+        System.out.println("Owner Address: " + ownerAddress);
+        System.out.println();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Car> cars = new ArrayList<>();
+
+        while (true) {
+            System.out.println("Choose the type of vehicle (1 for Transport Vehicle, 2 for Private Vehicle, 3 to exit): ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            if (choice == 1) {
+                System.out.print("Enter Registration Number: ");
+                String regNo = scanner.nextLine();
+                System.out.print("Enter Model: ");
+                String model = scanner.nextLine();
+                System.out.print("Enter Registration Date: ");
+                String regDate = scanner.nextLine();
+                System.out.print("Enter Validity Number: ");
+                String validityNo = scanner.nextLine();
+                System.out.print("Enter Start Date: ");
+                String startDate = scanner.nextLine();
+                System.out.print("Enter Period (in years): ");
+                int period = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                TransportVehicle transportVehicle = new TransportVehicle(regNo, model, regDate, validityNo, startDate, period);
+                cars.add(transportVehicle);
+            } else if (choice == 2) {
+                System.out.print("Enter Registration Number: ");
+                String regNo = scanner.nextLine();
+                System.out.print("Enter Model: ");
+                String model = scanner.nextLine();
+                System.out.print("Enter Registration Date: ");
+                String regDate = scanner.nextLine();
+                System.out.print("Enter Owner Name: ");
+                String ownerName = scanner.nextLine();
+                System.out.print("Enter Owner Address: ");
+                String ownerAddress = scanner.nextLine();
+
+                PrivateVehicle privateVehicle = new PrivateVehicle(regNo, model, regDate, ownerName, ownerAddress);
+                cars.add(privateVehicle);
+            } else if (choice == 3) {
+                break;
+            } else {
+                System.out.println("Invalid choice. Please enter 1 for Transport Vehicle, 2 for Private Vehicle, or 3 to exit.");
+            }
+        }
+
+        // Display details of all vehicles
+        for (Car car : cars) {
+            car.displayDetails();
+        }
+    }
+}
+
+
+
+
+
+
+// Define the CreditCardInterface
+interface CreditCardInterface {
+    void viewCreditAmount();
+    void viewPin();
+    void changePin(int newPin);
+    void payBalance(double amount);
+}
+
+// Implement the CreditCardInterface in the Customer class
+class Customer implements CreditCardInterface {
+    private String name;
+    private String cardNumber;
+    private int pin;
+    private double creditAmount;
+
+    public Customer(String name, String cardNumber, int pin) {
+        this.name = name;
+        this.cardNumber = cardNumber;
+        this.pin = pin;
+        this.creditAmount = 0.0;
+    }
+
+    @Override
+    public void viewCreditAmount() {
+        System.out.println(name + "'s Credit Amount: $" + creditAmount);
+    }
+
+    @Override
+    public void viewPin() {
+        System.out.println(name + "'s PIN: " + pin);
+    }
+
+    @Override
+    public void changePin(int newPin) {
+        this.pin = newPin;
+        System.out.println(name + "'s PIN has been changed to " + newPin);
+    }
+
+    @Override
+    public void payBalance(double amount) {
+        if (amount > 0 && creditAmount >= amount) {
+            creditAmount -= amount;
+            System.out.println(name + " has paid $" + amount + " from their credit balance.");
+        } else {
+            System.out.println("Invalid payment amount or insufficient balance.");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an array of customer objects
+        Customer[] customers = new Customer[3];
+        customers[0] = new Customer("John", "1234567890123456", 1234);
+        customers[1] = new Customer("Alice", "9876543210987654", 5678);
+        customers[2] = new Customer("Bob", "4567890123456789", 4321);
+
+        // Demonstrate actions on customer accounts
+        for (Customer customer : customers) {
+            customer.viewCreditAmount();
+            customer.viewPin();
+            customer.changePin(5678);
+            customer.payBalance(50.0);
+            customer.viewCreditAmount();
+            System.out.println();
+        }
+    }
+}
+
+
+
+
+
