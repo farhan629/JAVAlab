@@ -1,0 +1,384 @@
+MathOperations
+
+package pack1;
+
+
+
+public class MathOperations {
+
+    public int add(int a, int b) {
+
+        return a + b;
+
+    }
+
+
+
+    public int subtract(int a, int b) {
+
+        return a - b;
+
+    }
+
+}
+
+
+
+// StringOperations
+
+package pack2;
+
+
+
+public class StringOperations {
+
+    public String concatenate(String str1, String str2) {
+
+        return str1 + str2;
+
+    }
+
+
+
+    public String reverse(String str) {
+
+        StringBuilder reversed = new StringBuilder(str);
+
+        return reversed.reverse().toString();
+
+    }
+
+}
+
+
+
+// Calculator
+
+package pack3;
+
+
+
+public class Calculator {
+
+    public int multiply(int a, int b) {
+
+        return a * b;
+
+    }
+
+
+
+    public String divide(int a, int b) {
+
+        if (b == 0) {
+
+            return "Cannot divide by zero.";
+
+        }
+
+        return String.valueOf(a / b);
+
+    }
+
+}
+
+
+
+// MainApp
+
+import pack1.MathOperations;
+
+import pack2.StringOperations;
+
+import pack3.Calculator;
+
+
+
+public class MainApp {
+
+    public static void main(String[] args) {
+
+      
+
+        MathOperations math = new MathOperations();
+
+        StringOperations stringOps = new StringOperations();
+
+        Calculator calculator = new Calculator();
+
+
+
+       
+
+        int resultAdd = math.add(5, 3);
+
+        int resultSubtract = math.subtract(10, 4);
+
+
+
+        String resultConcatenate = stringOps.concatenate("Hello, ", "world!");
+
+        String resultReverse = stringOps.reverse("Java");
+
+
+
+        int resultMultiply = calculator.multiply(6, 7);
+
+        String resultDivide = calculator.divide(12, 4);
+
+        String resultDivideByZero = calculator.divide(8, 0);
+
+
+
+       
+
+        System.out.println("Math Operations:");
+
+        System.out.println("Addition: " + resultAdd);
+
+        System.out.println("Subtraction: " + resultSubtract);
+
+
+
+        System.out.println("\nString Operations:");
+
+        System.out.println("Concatenation: " + resultConcatenate);
+
+        System.out.println("Reversed String: " + resultReverse);
+
+
+
+        System.out.println("\nCalculator Operations:");
+
+        System.out.println("Multiplication: " + resultMultiply);
+
+        System.out.println("Division: " + resultDivide);
+
+        System.out.println("Division by Zero: " + resultDivideByZero);
+
+    }
+
+} 
+
+
+employee 
+
+package employee_data;
+
+public class Employee {
+
+    final String empName;
+
+    final int empId;
+
+    final String category;
+
+    final String address;
+
+    final String mailId;
+
+    final String mobileNo;
+
+    final double basicPay;
+
+
+
+    public Employee(String empName, int empId, String category, String address, String mailId, String mobileNo, double basicPay) {
+
+        this.empName = empName;
+
+        this.empId = empId;
+
+        this.category = category;
+
+        this.address = address;
+
+        this.mailId = mailId;
+
+        this.mobileNo = mobileNo;
+
+        this.basicPay = basicPay;
+
+    }
+
+@Override
+
+    public String toString() {
+
+        return "Employee{" +
+
+                "empName='" + empName + '\'' +
+
+                ", empId=" + empId +
+
+                ", category='" + category + '\'' +
+
+                ", address='" + address + '\'' +
+
+                ", mailId='" + mailId + '\'' +
+
+                ", mobileNo='" + mobileNo + '\'' +
+
+                ", basicPay=" + basicPay +
+
+                '}';
+
+    }
+
+    
+
+  
+
+  //PaySlipCalculator
+
+
+
+package employee_data;
+
+public class PaySlipCalculator {
+
+    public static double calculateDA(double basicPay) {
+
+        return 0.97 * basicPay;
+
+    }
+
+
+
+    public static double calculateHRA(double basicPay) {
+
+        return 0.10 * basicPay;
+
+    }
+
+
+
+    public static double calculatePF(double basicPay) {
+
+        return 0.12 * basicPay;
+
+    }
+
+
+
+    public static double calculateStaffClubFund(double basicPay) {
+
+        return 0.001 * basicPay;
+
+    }
+
+
+
+    public static double calculateGrossSalary(double basicPay) {
+
+        return basicPay + calculateDA(basicPay) + calculateHRA(basicPay) + calculateStaffClubFund(basicPay);
+
+    }
+
+}
+
+
+
+//IncomeTaxCalculator 
+
+package employee_data;
+
+public class IncomeTaxCalculator {
+
+    public static double calculateIncomeTax(String category, double grossSalary) {
+
+        if ("Male".equals(category)) {
+
+            if (grossSalary <= 190000) {
+
+                return 0.0;
+
+            } else if (grossSalary <= 200000) {
+
+                return 0.10 * grossSalary;
+
+            } else if (grossSalary <= 500000) {
+
+                return 0.20 * grossSalary;
+
+            } else {
+
+                return 0.25 * grossSalary;
+
+            }
+
+        } else if ("Female".equals(category)) {
+
+            if (grossSalary <= 190000) {
+
+                return 0.0;
+
+            } else if (grossSalary <= 500000) {
+
+                return 0.10 * grossSalary;
+
+            } else {
+
+                return 0.20 * grossSalary;
+
+            }
+
+        }
+
+        return 0.0;
+
+    }
+
+}
+
+//importing
+
+import employee_data.Employee;
+
+import employee_data.PaySlipCalculator;
+
+import employee_data.IncomeTaxCalculator;
+
+
+
+public class TestEmployeeData {
+
+    public static void main(String[] args) {
+
+        Employee employee1 = new Employee("John Doe", 101, "Male", "123 Main St", "john@example.com", "555-123-4567", 500000);
+
+        Employee employee2 = new Employee("Jane Smith", 102, "Female", "456 Elm St", "jane@example.com", "555-987-6543", 300000);
+
+
+
+        System.out.println("Employee 1 Details:");
+
+        System.out.println(employee1);
+
+        double grossSalary1 = PaySlipCalculator.calculateGrossSalary(employee1.getBasicPay());
+
+        double incomeTax1 = IncomeTaxCalculator.calculateIncomeTax(employee1.getCategory(), grossSalary1);
+
+        System.out.println("Gross Salary: " + grossSalary1);
+
+        System.out.println("Income Tax: " + incomeTax1);
+
+
+
+        System.out.println("\nEmployee 2 Details:");
+
+        System.out.println(employee2);
+
+        double grossSalary2 = PaySlipCalculator.calculateGrossSalary(employee2.getBasicPay());
+
+        double incomeTax2 = IncomeTaxCalculator.calculateIncomeTax(employee2.getCategory(), grossSalary2);
+
+        System.out.println("Gross Salary: " + grossSalary2);
+
+        System.out.println("Income Tax: " + incomeTax2);
+
+    }
+
+}
+
+
