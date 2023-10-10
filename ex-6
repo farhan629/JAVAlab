@@ -1,0 +1,56 @@
+public class DistanceFromAverageWithExceptionHandling {
+    public static void main(String[] args) {
+        try
+        (Scanner input = new Scanner(System.in)) {
+            int arraySize = 0;
+             try
+            {
+                System.out.print("Enter the array size (up to 20): ");
+                arraySize = Integer.parseInt(input.nextLine());
+               
+                // Check for a negative array size
+                if (arraySize < 0) {
+                    throw new NegativeArraySizeException();
+                }
+               
+                // Checke array size (greater than 20)
+                if (arraySize > 20) {
+                    System.out.println("Array size must be less than or equal to 20.");
+                    return;
+                }
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Invalid input for array size. Please enter a valid integer.");
+                return;
+            }
+            catch (NegativeArraySizeException e) {
+                System.out.println("Array size cannot be negative.");
+                return;
+            }
+           
+            double[] values = new double[arraySize];
+           
+            double sum = 0.0;
+            for (int i = 0; i < arraySize; i++) {
+                try {
+                    System.out.print("Enter a double value: ");
+                    values[i] = Double.parseDouble(input.nextLine());
+                    sum += values[i];
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a valid double value.");
+                   
+                }
+            }
+            // Calculate the average
+            double average = sum / arraySize;
+            
+            System.out.println("Entered values and their distances from the average:");
+            for (int i = 0; i < arraySize; i++) {
+                double distance = Math.abs(values[i] - average);
+                System.out.println("Value: " + values[i] + ", Distance from Average: " + distance);
+            }
+        }  
+    }
+}
+
