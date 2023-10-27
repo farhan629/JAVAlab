@@ -1,0 +1,98 @@
+package javaapplication20;
+ public class JavaApplication20 
+{ 
+public static void main(String[] args) {
+ obj=new sequence(); 
+mythread1 t1=new mythread1(obj); 
+mythread2 t2=new mythread2(obj);
+ mythread3 t3=new mythread3(obj);
+ t1.start();
+ t2.start(); 
+t3.start();
+ } 
+}
+ class sequence { 
+synchronized void printsequence(int m,int n){ 
+for(int i=m;i<n;i++)
+{ 
+System.out.println(Thread.currentThread().getName()+":"+i);
+ try { Thread.sleep(400); 
+} 
+catch(Exception e) { System.out.println(e.getMessage()); 
+}
+         }
+     }
+ }
+ class mythread1 extends Thread
+ { 
+sequence s;
+ int n;
+ mythread1(sequence s) 
+{
+ this.s=s;
+ } 
+public void run() 
+{
+ s.printsequence(1,40); }
+ }
+ class mythread2 extends Thread {
+ sequence s;
+ int n;
+ mythread2(sequence s){
+ this.s=s;
+ }
+ public void run()
+ {
+ s.printsequence(41,80); }
+ } 
+class mythread3 extends Thread {
+ sequence s;
+ int n; 
+mythread3 (sequence s) {
+ this.s=s; 
+}
+ public void run() {
+ s.printsequence(81,100); } 
+}
+ 
+
+
+
+
+
+import java.util.Scanner;
+
+public class TestThreadMany {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter a positive integer (n): ");
+        int n = scanner.nextInt();
+
+        if (n <= 0) {
+            System.out.println("Please provide a positive integer.");
+            System.exit(1);
+        }
+
+        for (int i = 1; i <= n; i++) {
+            Thread thread = new Thread(new MyThread("Thread " + i));
+            thread.start();
+        }
+        
+        scanner.close();
+    }
+
+    static class MyThread implements Runnable {
+        private String name;
+
+        public MyThread(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("Thread Name: " + name);
+        }
+    }
+}
+           
