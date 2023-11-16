@@ -1,4 +1,4 @@
-import java.util.List;
+1-1-import java.util.List;
 
 public class OddIntegerCounter {
 
@@ -17,5 +17,83 @@ public class OddIntegerCounter {
         List<Integer> integerList = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
         int oddCount = countOddIntegers(integerList);
         System.out.println("Number of odd integers: " + oddCount);
+    }
+}
+
+1-2-public class ArrayElementSwapper {
+
+    public static <T> void swapElements(T[] array, int index1, int index2) {
+        if (index1 >= 0 && index1 < array.length && index2 >= 0 && index2 < array.length) {
+            T temp = array[index1];
+            array[index1] = array[index2];
+            array[index2] = temp;
+        } else {
+            System.out.println("Invalid indices. Please make sure indices are within the array bounds.");
+        }
+    }
+
+    public static void main(String[] args) {
+        // Example usage:
+        Integer[] intArray = {1, 2, 3, 4, 5};
+        System.out.println("Original array: " + Arrays.toString(intArray));
+        swapElements(intArray, 1, 3);
+        System.out.println("Array after swapping elements: " + Arrays.toString(intArray));
+    }
+}
+1-3-import java.util.List;
+
+public class MaxElementFinder {
+
+    public static <T extends Comparable<T>> T findMaxElementInRange(List<T> list, int begin, int end) {
+        if (begin < 0 || end >= list.size() || begin > end) {
+            throw new IllegalArgumentException("Invalid range");
+        }
+
+        T maxElement = list.get(begin);
+        for (int i = begin + 1; i <= end; i++) {
+            if (list.get(i).compareTo(maxElement) > 0) {
+                maxElement = list.get(i);
+            }
+        }
+
+        return maxElement;
+    }
+
+    public static void main(String[] args) {
+        // Example usage:
+        List<Integer> integerList = List.of(3, 7, 2, 8, 5, 10);
+        int beginIndex = 1;
+        int endIndex = 4;
+        Integer maxElement = findMaxElementInRange(integerList, beginIndex, endIndex);
+        System.out.println("Max element in the range [" + beginIndex + ", " + endIndex + "]: " + maxElement);
+    }
+}
+
+
+2-import java.util.List;
+
+public class ElementSearcher {
+
+    public static <T> boolean searchElement(List<T> list, T targetElement) {
+        for (T element : list) {
+            if (element.equals(targetElement)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        // Example usage:
+        List<String> stringList = List.of("apple", "banana", "orange", "grape");
+        String targetString = "orange";
+        
+        boolean isElementFound = searchElement(stringList, targetString);
+
+        if (isElementFound) {
+            System.out.println(targetString + " is present in the list.");
+        } else {
+            System.out.println(targetString + " is not present in the list.");
+        }
     }
 }
