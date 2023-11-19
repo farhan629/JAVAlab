@@ -1,4 +1,68 @@
 
+1-
+import java.util.ArrayList;
+import java.util.Random;
+
+public class ArrayAverageSeparation {
+
+    public static void main(String[] args) {
+        // Create an array of size 20 and initialize values randomly between 10 and 90
+        int[] intArray = new int[20];
+        Random random = new Random();
+
+        for (int i = 0; i < intArray.length; i++) {
+            intArray[i] = random.nextInt(81) + 10; // Random value between 10 and 90
+        }
+
+        // Calculate sum and average of the array
+        int sum = 0;
+        for (int num : intArray) {
+            sum += num;
+        }
+        double average = (double) sum / intArray.length;
+
+        // Separate values below and above average into ArrayLists
+        ArrayList<Integer> belowAverageList = new ArrayList<>();
+        ArrayList<Integer> aboveAverageList = new ArrayList<>();
+
+        for (int num : intArray) {
+            if (num < average) {
+                belowAverageList.add(num);
+            } else {
+                aboveAverageList.add(num);
+            }
+        }
+
+        // Print the original array
+        System.out.println("Original Array:");
+        for (int num : intArray) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        // Print values below average
+        System.out.println("Values below average:");
+        for (int num : belowAverageList) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        // Print values above average
+        System.out.println("Values above average:");
+        for (int num : aboveAverageList) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        // Print the calculated average
+        System.out.println("Average: " + average);
+    }
+}
+
+
+
+
+2-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
