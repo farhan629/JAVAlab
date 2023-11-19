@@ -1,0 +1,70 @@
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+class Student {
+    private String name;
+    private int rollNo;
+    private double cgpa;
+
+    public Student(String name, int rollNo, double cgpa) {
+        this.name = name;
+        this.rollNo = rollNo;
+        this.cgpa = cgpa;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getRollNo() {
+        return rollNo;
+    }
+
+    public double getCgpa() {
+        return cgpa;
+    }
+}
+
+class CGPAComparator implements Comparator<Student> {
+    @Override
+    public int compare(Student student1, Student student2) {
+        // Compare students based on CGPA in descending order
+        return Double.compare(student2.getCgpa(), student1.getCgpa());
+    }
+}
+
+public class StudentSorting {
+    public static void main(String[] args) {
+        // Create an ArrayList to store student information
+        ArrayList<Student> studentList = new ArrayList<>();
+
+        // Add 20 students with random information
+        for (int i = 1; i <= 20; i++) {
+            String name = "Student" + i;
+            int rollNo = i;
+            double cgpa = Math.round(Math.random() * 4.0 * 100.0) / 100.0; // Random CGPA between 0.0 and 4.0
+            studentList.add(new Student(name, rollNo, cgpa));
+        }
+
+        // Print unsorted student information
+        System.out.println("Unsorted Student Information:");
+        for (Student student : studentList) {
+            System.out.println("Name: " + student.getName() +
+                    ", Roll No: " + student.getRollNo() +
+                    ", CGPA: " + student.getCgpa());
+        }
+
+        // Use Comparator to sort students based on CGPA
+        Collections.sort(studentList, new CGPAComparator());
+
+        // Print sorted student information
+        System.out.println("\nSorted Student Information (based on CGPA):");
+        for (Student student : studentList) {
+            System.out.println("Name: " + student.getName() +
+                    ", Roll No: " + student.getRollNo() +
+                    ", CGPA: " + student.getCgpa());
+        }
+    }
+}
